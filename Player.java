@@ -1,5 +1,5 @@
 
-package school.game;
+ 
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class Player extends GameObject
        
    }
    public void fire (int xSpeed, int ySpeed) {
-	   Projectile bullet = new Projectile(x, y, 2, 2, xSpeed, ySpeed);
+	   Projectile bullet = new Projectile(x, y, 10, 10, xSpeed, ySpeed);
 	   bullets.add(bullet);
 	   
    }

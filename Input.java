@@ -1,4 +1,4 @@
-package school.game;
+ 
 
 import java.awt.Component;
 
@@ -8,9 +8,32 @@ public class Input implements KeyListener, MouseListener
 {
    private boolean[] keys = new  boolean[256];
    private boolean[] mouse = new boolean[3];
+   private boolean[]justPressed = new boolean[256], cantPress = new boolean[256];
    public Input(Component c) {
     c.addKeyListener(this);
     c.addMouseListener(this);
+    }
+    
+    public void update() {
+        for (int i = 0; i < keys.length; i++) {
+        if (cantPress[i] && !keys[i]) {
+            cantPress[i] = false;
+        }
+        else if (justPressed[i]) {
+        cantPress[i] = true;
+        justPressed[i] = false;
+        }
+        if (!cantPress[i] && keys[i]) {
+        justPressed[i] = true;
+        }
+        }
+        
+    }
+    
+    public boolean keyJustPressed(int keyCode) {
+        if (keyCode < 0 || keyCode >= justPressed.length)
+            return false;
+        return justPressed[keyCode];
     }
     
     public boolean isKeyDown (int key) {

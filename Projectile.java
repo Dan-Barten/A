@@ -1,4 +1,4 @@
-package school.game;
+ 
 
 public class Projectile extends GameObject {
 	
