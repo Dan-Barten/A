@@ -1,4 +1,7 @@
+package school.game;
+
 import java.awt.Component;
+
 import java.awt.event.*;
 
 public class Input implements KeyListener, MouseListener

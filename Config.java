@@ -1,8 +1,9 @@
-
+package school.game;
 
 public class Config
 {
-   int playerHP;
-   int playerSpeed;
+
+  static int playerHP;
+  static int playerSpeed = 3;
    
 }

@@ -1,6 +1,10 @@
+package school.game;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
@@ -9,7 +13,7 @@ public class Game extends JFrame {
     private static final long serialVersionUID = 3669983212511282912L;
     private boolean running = false; 
     private final long fps = 60;
-    public static final int WINDOW_WIDTH = 640;
+    public static final int WINDOW_WIDTH = 900;
     public static final int WINDOW_HEIGHT = WINDOW_WIDTH / 12 * 9;
     public BufferedImage backBuffer;    	
     Insets insets;
@@ -65,30 +69,56 @@ public class Game extends JFrame {
             setSize(insets.left + WINDOW_WIDTH + insets.right, insets.top + WINDOW_HEIGHT + insets.bottom);
             input = new Input (this);
             player = new Player();
+
     }
 public void update() {
+	for (Projectile bullet : player.bullets) {
+		bullet.x += bullet.horVelc;
+		bullet.y += bullet.vertVelc;
+		
+	} 
     if (input.isKeyDown(KeyEvent.VK_D)) {
-        player.x += 2;
+        player.x += Config.playerSpeed;
     } 
     
     if (input.isKeyDown(KeyEvent.VK_A)) {
-    player.x -= 2;
+    player.x -= Config.playerSpeed;
     }
         if (input.isKeyDown(KeyEvent.VK_S)) {
-       player.y += 2;
+       player.y += Config.playerSpeed;
     } 
     
     if (input.isKeyDown(KeyEvent.VK_W)) {
-   player.y -= 2;
+   player.y -= Config.playerSpeed;
+   
+   
+   if (input.isKeyDown(KeyEvent.VK_RIGHT)) {
+	   player.fire(10, 0);
+   } 
+   
+   if (input.isKeyDown(KeyEvent.VK_LEFT)) {
+	   player.fire(-10, 0);
+   }
+       if (input.isKeyDown(KeyEvent.VK_DOWN)) {
+    	   player.fire(0, 10);
+   } 
+   
+   if (input.isKeyDown(KeyEvent.VK_UP)) {
+	   player.fire(0, -10);
+	   
     }
+   
     if (player.x< 0)
     player.x = 0;
     if (player.y < 0) 
    player.y = 0;
-    if (player.x> WINDOW_WIDTH - 20)
-    player.x = WINDOW_WIDTH - 20;
-    if (player.y > WINDOW_HEIGHT - 20) 
-   player.y = WINDOW_HEIGHT - 20;
+    
+    if (player.x> WINDOW_WIDTH - player.width)
+    player.x = WINDOW_WIDTH - player.width;
+    
+    if (player.y > WINDOW_HEIGHT - player.height) 
+   player.y = WINDOW_HEIGHT - player.height;
+    }
     }
 
 public void draw() {
@@ -97,11 +127,18 @@ Graphics g = getGraphics();
 
 Graphics bbg = backBuffer.getGraphics();
 
-bbg.setColor(Color.white);
+bbg.setColor(Color.black);
 bbg.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-bbg.setColor(Color.black);
-bbg.drawOval(player.x, player.y, 20, 20);
+bbg.setColor(Color.blue);
+for (Projectile bullet : player.bullets)
+	{
+	bbg.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+	}
+
+bbg.setColor(Color.green);
+bbg.fillOval(player.x, player.y, player.width, player.height);
+
 
 g.drawImage(backBuffer, insets.left, insets.top, this); 
 }
