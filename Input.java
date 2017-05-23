@@ -1,4 +1,4 @@
- 
+package school.game;
 
 import java.awt.Component;
 

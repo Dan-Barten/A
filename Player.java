@@ -1,6 +1,7 @@
-
+ package school.game;
  
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class Player extends GameObject
@@ -16,8 +17,11 @@ public class Player extends GameObject
        
    }
    public void fire (int xSpeed, int ySpeed) {
-	   Projectile bullet = new Projectile(x, y, 10, 10, xSpeed, ySpeed);
-	   bullets.add(bullet);
+	   bullets.add(new Projectile(x, y, 10, 10, xSpeed, ySpeed ));
+		   }
 	   
    }
-}
+   
+
+		
+

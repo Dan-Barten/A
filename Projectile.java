@@ -1,4 +1,6 @@
- 
+ package school.game;
+
+import java.awt.Rectangle;
 
 public class Projectile extends GameObject {
 	
@@ -11,5 +13,6 @@ public class Projectile extends GameObject {
 		horVelc = myXSpeed;
 		vertVelc = myYSpeed;
 	}
-
+	
+	
 }
